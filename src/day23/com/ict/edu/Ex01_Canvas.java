@@ -9,7 +9,7 @@ public class Ex01_Canvas extends Canvas {
 	Image image;
 	
 	//이미지가 좌우만 움직인다(= x축만 움직인다)
-	int x = 200;
+	int x = 200; //중앙에서 시작하기 때문에.
 	
 	@Override
 	public void paint(Graphics g) {
