@@ -21,7 +21,7 @@ public static void main(String[] args) {
 				conn = DriverManager.getConnection(url, user, password);
 				
 				//박세리의 주소를 대한민국 제주도, 전화번호를 000-90000-0001로 변경하자
-				String sql = "update from customer where name = '이강인'";
+				String sql = "update customer set address = '대한민국 제주도', phone = '000-90000-0001' where name = '박세리'";
 				stmt = conn.createStatement();
 				result = stmt.executeUpdate(sql);
 				sql = "select * from customer order by custid asc";
