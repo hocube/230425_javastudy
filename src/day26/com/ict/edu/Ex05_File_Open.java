@@ -20,14 +20,14 @@ import javax.swing.ScrollPaneConstants;
 
 //D:/PJH/test02.txt
 //jta에 불러오기.
-public class Ex05_File_Read extends JFrame {
+public class Ex05_File_Open extends JFrame {
 	JPanel jp1;
 	JTextField jtf;
 	JLabel jl;
 	JButton jb;
 	JTextArea jta;
 
-	public Ex05_File_Read() {
+	public Ex05_File_Open() {
 		super("불러오기");
 
 		jp1 = new JPanel();
@@ -85,7 +85,7 @@ public class Ex05_File_Read extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Ex05_File_Read();
+		new Ex05_File_Open();
 
 	}
 }

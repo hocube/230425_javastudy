@@ -34,7 +34,7 @@ public class Team extends JFrame{
 		jp1.add(jl1);
 		
 		jp2 = new JPanel();
-		jl2 = new JLabel("ID: ");
+		jl2 = new JLabel("ID : ");
 		jtf1 = new JTextField(10);
 		jp2.add(jl2);
 		jp2.add(jtf1);
@@ -97,7 +97,7 @@ public class Team extends JFrame{
 		add(jsp, BorderLayout.CENTER);
 		add(jp7, BorderLayout.SOUTH);
 		
-		setSize(500, 500);
+		setSize(500, 350);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
