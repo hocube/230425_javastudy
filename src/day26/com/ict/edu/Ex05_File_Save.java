@@ -69,20 +69,20 @@ public class Ex05_File_Save extends JFrame {
 
 			}
 		});
-		
-		//마우스 클릭
+
+		// 마우스 클릭
 		jtf.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			FileDialog fd = new FileDialog((Frame) getParent(), "저장하기", FileDialog.SAVE);
-			fd.setVisible(true);
-			String msg = fd.getDirectory()+fd.getFile();
-			System.out.println(msg);
-			if(! msg.equals("nullnull")) { //nullnull이 아닐 때만
-				  jtf.setText(msg); //이렇게 해야지만 취소를 눌렀을 때와 이름 없이 저장 눌렀을 때 
-				  					//콘솔창에 아무 반응 안한다.
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FileDialog fd = new FileDialog((Frame) getParent(), "저장하기", FileDialog.SAVE);
+				fd.setVisible(true);
+				String msg = fd.getDirectory() + fd.getFile();
+				System.out.println(msg);
+				if (!msg.equals("nullnull")) { // nullnull이 아닐 때만
+					jtf.setText(msg); // 이렇게 해야지만 취소를 눌렀을 때와 이름 없이 저장 눌렀을 때
+										// 콘솔창에 아무 반응 안한다.
+				}
 			}
-		}
 		});
 
 	}
