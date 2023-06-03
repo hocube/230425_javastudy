@@ -6,7 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-//D:/PJH/java1.png 읽어서 D:/PJH/util/java1.png에 쓰기(복사)
+//D:/PJH/java1.png 읽어서 
+//D:/PJH/util/java1.png에 쓰기(복사)
 public class Ex04_File_IO {
 	public static void main(String[] args) {
 		String pathnameIn = "D:/PJH/java1.png";
@@ -43,7 +44,7 @@ public class Ex04_File_IO {
 				bos.close();
 				fos.close();
 				bis.close();
-				bos.close();
+				fis.close();
 
 			} catch (Exception e2) {
 			}

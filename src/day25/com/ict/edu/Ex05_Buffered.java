@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 //Ex04의 속도 향상을위해서 BufferedOutputStream 사용
-//BufferedOutputStream는 혼자서는 사요하지 않는다. 반드시 OutputStream 중 하나와 같이 사용 된다.
+//BufferedOutputStream는 혼자서는 사용하지 않는다. 반드시 OutputStream 중 하나와 같이 사용 된다.
 
 public class Ex05_Buffered {
 public static void main(String[] args) {

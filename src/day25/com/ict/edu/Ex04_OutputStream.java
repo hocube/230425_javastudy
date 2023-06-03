@@ -11,7 +11,7 @@ import java.io.IOException;
 //							  **아스키코드(숫자, 대문자, 소문자, 일부 특수문자를 숫자와 1:1 매칭한 코드)
 //				  write(byte[] b) : 배열은 아스키코드의 배열이다.
 //							  **String 클래스에서 getBytes()를 이용해서 byte[]로 만들어서 사용
-//				  flush() : //버퍼 내용이 채워지지 않아도 출력하게 만듦
+//				  flush() : 버퍼 내용이 채워지지 않아도 출력하게 만듦
 //	              close() : 출력 스트림 닫기
 
 public class Ex04_OutputStream {

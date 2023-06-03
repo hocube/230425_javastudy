@@ -1,4 +1,4 @@
-package day25.com.ict.edu;
+package jdbc.com.ict.edu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
