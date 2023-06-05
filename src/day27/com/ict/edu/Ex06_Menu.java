@@ -5,6 +5,13 @@ import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -19,14 +26,14 @@ import javax.swing.ScrollPaneConstants;
 // 메뉴바에 메뉴를 붙인다. 메뉴에 메뉴아이템을 붙인다.
 // 메뉴바는 프레임에 붙인다. (setJMenuBar)
 // 메뉴아이템 -> 메뉴 -> 메뉴바 -> 프레임
-public class Ex07_Menu extends JFrame {
+public class Ex06_Menu extends JFrame {
 	JTextArea jta;
 	JScrollPane jsp;
 	JMenuBar jmb;
 	JMenu m_file, m_form, font_form, m_help;
 	JMenuItem i_newFile, i_openFile, i_saveFile, i_exitFile, i_Item1, i_Item2, i_Item3, i_help, i_info;
 
-	public Ex07_Menu() {
+	public Ex06_Menu() {
 		super("간단메모장");
 
 		jta = new JTextArea();
@@ -96,7 +103,32 @@ public class Ex07_Menu extends JFrame {
 					int res = JOptionPane.showOptionDialog(getParent(), "변견 내용을 제목 없음에 저장하시겠습니까?", "간단 메모장",
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 					if (res == 0) {
-						// 실제 저장 하는 코드
+						//실제 저장 하는 코드
+						FileDialog fd = new FileDialog((JFrame) getParent(), "파일 저장", FileDialog.SAVE);
+						fd.setVisible(true);
+						String pathname = fd.getDirectory() + fd.getFile();
+						if (pathname.length() > 0) {
+							File file = new File(pathname);
+							FileOutputStream fos = null;
+							BufferedOutputStream bos = null;
+
+							try {
+								fos = new FileOutputStream(file);
+								bos = new BufferedOutputStream(fos);
+
+								String msg = jta.getText().trim();
+								bos.write(msg.getBytes());
+								bos.flush();
+
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							} finally {
+								try {
+
+								} catch (Exception e2) {
+								}
+							}
+						}
 					} else if (res == 1) {
 						// 아니요 누르면 내용지워지기.
 						jta.setText("");
@@ -105,17 +137,40 @@ public class Ex07_Menu extends JFrame {
 					}
 				}
 			}
-			
 		});
 		// 열기
 		i_openFile.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 파일 열기 다이얼로그
+				//파일 열기 다이얼로그
 				FileDialog fd = new FileDialog((JFrame) getParent(), "파일 열기", FileDialog.LOAD);
 				fd.setVisible(true);
-				// 실제 불러오는 코딩
+				//실제 불러오는 코딩
+				String pathname = fd.getDirectory() + fd.getFile();
+				if (pathname.length() > 0) {
+					File file = new File(pathname);
+					FileInputStream fis = null;
+					BufferedInputStream bis = null;
+					try {
+						fis = new FileInputStream(file);
+						bis = new BufferedInputStream(fis);
+
+						byte[] b = new byte[(int) file.length()];
+						bis.read(b);
+						String msg = new String(b).trim();
+						jta.setText(msg);
+
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					} finally {
+						try {
+							bis.close();
+							fis.close();
+						} catch (Exception e2) {
+						}
+					}
+				}
 			}
 		});
 
@@ -124,11 +179,34 @@ public class Ex07_Menu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 파일 저장 다이얼로그
+				//파일 저장 다이얼로그
 				FileDialog fd = new FileDialog((JFrame) getParent(), "파일 저장", FileDialog.SAVE);
 				fd.setVisible(true);
-				// 실제 저장하는 코딩(I/O)
-				
+				//실제 저장하는 코딩
+
+				String pathname = fd.getDirectory() + fd.getFile();
+				if (pathname.length() > 0) {
+					File file = new File(pathname);
+					FileOutputStream fos = null;
+					BufferedOutputStream bos = null;
+
+					try {
+						fos = new FileOutputStream(file);
+						bos = new BufferedOutputStream(fos);
+
+						String msg = jta.getText().trim();
+						bos.write(msg.getBytes());
+						bos.flush();
+
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} finally {
+						try {
+
+						} catch (Exception e2) {
+						}
+					}
+				}
 			}
 		});
 
@@ -197,6 +275,6 @@ public class Ex07_Menu extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Ex07_Menu();
+		new Ex06_Menu();
 	}
 }

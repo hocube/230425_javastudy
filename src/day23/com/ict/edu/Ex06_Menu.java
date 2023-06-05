@@ -104,6 +104,31 @@ public class Ex06_Menu extends JFrame {
 							JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
 					if (res == 0) {
 						// 실제 저장 하는 코드
+						FileDialog fd = new FileDialog((JFrame) getParent(), "파일 저장", FileDialog.SAVE);
+						fd.setVisible(true);
+						String pathname = fd.getDirectory() + fd.getFile();
+						if (pathname.length() > 0) {
+							File file = new File(pathname);
+							FileOutputStream fos = null;
+							BufferedOutputStream bos = null;
+
+							try {
+								fos = new FileOutputStream(file);
+								bos = new BufferedOutputStream(fos);
+
+								String msg = jta.getText().trim();
+								bos.write(msg.getBytes());
+								bos.flush();
+
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							} finally {
+								try {
+
+								} catch (Exception e2) {
+								}
+							}
+						}
 					} else if (res == 1) {
 						// 아니요 누르면 내용지워지기.
 						jta.setText("");
@@ -122,8 +147,7 @@ public class Ex06_Menu extends JFrame {
 				FileDialog fd = new FileDialog((JFrame) getParent(), "파일 열기", FileDialog.LOAD);
 				fd.setVisible(true);
 				// 실제 불러오는 코딩
-				
-				String pathname = fd.getDirectory()+fd.getFile();
+				String pathname = fd.getDirectory() + fd.getFile();
 				if (pathname.length() > 0) {
 					File file = new File(pathname);
 					FileInputStream fis = null;
@@ -131,15 +155,15 @@ public class Ex06_Menu extends JFrame {
 					try {
 						fis = new FileInputStream(file);
 						bis = new BufferedInputStream(fis);
-						
-						byte[] b = new byte[(int)file.length()];
+
+						byte[] b = new byte[(int) file.length()];
 						bis.read(b);
 						String msg = new String(b).trim();
 						jta.setText(msg);
-						
+
 					} catch (Exception e1) {
 						e1.printStackTrace();
-					}finally {
+					} finally {
 						try {
 							bis.close();
 							fis.close();
@@ -159,26 +183,26 @@ public class Ex06_Menu extends JFrame {
 				FileDialog fd = new FileDialog((JFrame) getParent(), "파일 저장", FileDialog.SAVE);
 				fd.setVisible(true);
 				// 실제 저장하는 코딩
-				
-				String pathname = fd.getDirectory()+fd.getFile();
+
+				String pathname = fd.getDirectory() + fd.getFile();
 				if (pathname.length() > 0) {
 					File file = new File(pathname);
 					FileOutputStream fos = null;
 					BufferedOutputStream bos = null;
-					
+
 					try {
 						fos = new FileOutputStream(file);
 						bos = new BufferedOutputStream(fos);
-						
+
 						String msg = jta.getText().trim();
 						bos.write(msg.getBytes());
 						bos.flush();
-						
+
 					} catch (IOException e1) {
 						e1.printStackTrace();
-					}finally {
+					} finally {
 						try {
-							
+
 						} catch (Exception e2) {
 						}
 					}
