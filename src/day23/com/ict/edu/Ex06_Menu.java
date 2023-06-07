@@ -7,10 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -147,26 +149,27 @@ public class Ex06_Menu extends JFrame {
 				FileDialog fd = new FileDialog((JFrame) getParent(), "파일 열기", FileDialog.LOAD);
 				fd.setVisible(true);
 				// 실제 불러오는 코딩
-				String pathname = fd.getDirectory() + fd.getFile();
-				if (pathname.length() > 0) {
-					File file = new File(pathname);
-					FileInputStream fis = null;
-					BufferedInputStream bis = null;
+				String msg = fd.getDirectory() + fd.getFile();
+				
+				if (! msg.equals("nullnull")) {
+					jta.setText("");
+					File file = new File(msg);
+					FileReader fr = null;
+					BufferedReader br = null;
 					try {
-						fis = new FileInputStream(file);
-						bis = new BufferedInputStream(fis);
-
-						byte[] b = new byte[(int) file.length()];
-						bis.read(b);
-						String msg = new String(b).trim();
-						jta.setText(msg);
+						fr = new FileReader(file);
+						br = new BufferedReader(fr);
+						String str = null;
+						while ((str = br.readLine()) != null)  {
+							jta.append(str);  //jta에 읽어져라
+						}
 
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					} finally {
 						try {
-							bis.close();
-							fis.close();
+							fr.close();
+							br.close();
 						} catch (Exception e2) {
 						}
 					}
