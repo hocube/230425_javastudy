@@ -10,7 +10,7 @@ import java.util.ArrayList;
 // readObject() : 객체 역직렬화 메서드
 public class Ex03_ObjectInputStream {
 	public static void main(String[] args) {
-		String pathname = "D:/PJH/object01.ser";
+		String pathname = "D:/PJH/object02.ser";
 		File file = new File(pathname);
 
 		FileInputStream fis = null;
@@ -26,7 +26,7 @@ public class Ex03_ObjectInputStream {
 			ArrayList<Ex03_VO> list = (ArrayList<Ex03_VO>) ois.readObject();
 			// ArrayList<Ex03_VO>로 보냈기 때문에 이걸로 받아야 함.
 			// 만약 vo1 한개였으면 그걸로 받으면 된다.
-			// 그리도 뒤에는 캐스팅해서 저렇게 된거다.
+			// 뒤에는 캐스팅해서 저렇게 된거다.
 
 			for (Ex03_VO k : list) {
 				System.out.print(k.getName() + "\t");
