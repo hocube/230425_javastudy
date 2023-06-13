@@ -1,7 +1,8 @@
 package Mybatis.test;
 
-public class VO {
-	private String custid, name, address, phone;
+public class VO_TEST1 {
+
+	private String custid, name, adress, phone;
 
 	public String getCustid() {
 		return custid;
@@ -19,12 +20,12 @@ public class VO {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getAdress() {
+		return adress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAdress(String adress) {
+		this.adress = adress;
 	}
 
 	public String getPhone() {
