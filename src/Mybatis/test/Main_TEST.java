@@ -100,6 +100,7 @@ public class Main_TEST extends JFrame {
 			List<VO_TEST1> list = null;
 			VO_TEST1 vo = new VO_TEST1();
 			list = DAO_TEST1.getList();
+			jta.setText("");
 			prn(list);
 		}
 	});
@@ -111,9 +112,9 @@ public class Main_TEST extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			VO_TEST1 vo = new VO_TEST1();
 			vo.setCustid(jtf1.getText());
-			vo.setName(jtf1.getText());
-			vo.setAdress(jtf1.getText());
-			vo.setPhone(jtf1.getText());
+			vo.setName(jtf2.getText());
+			vo.setAddress(jtf3.getText());
+			vo.setPhone(jtf4.getText());
 			int result = DAO_TEST1.getInsert(vo);
 			if (result > 0) {
 				jta.setText("");
@@ -157,7 +158,7 @@ public class Main_TEST extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			VO_TEST1 vo = DAO_TEST1.getOne(jtf1.getText());
 			jtf2.setText(vo.getName());
-			jtf3.setText(vo.getAdress());
+			jtf3.setText(vo.getAddress());
 			jtf4.setText(vo.getPhone());
 		}
 	});
@@ -169,8 +170,8 @@ public class Main_TEST extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			VO_TEST1 vo = DAO_TEST1.getOne(jtf1.getText());
 			vo.setName(jtf2.getText());
-			vo.setName(jtf3.getText());
-			vo.setName(jtf4.getText());
+			vo.setAddress(jtf3.getText());
+			vo.setPhone(jtf4.getText());
 			int result3 = DAO_TEST1.getUpdate(vo);
 			if (result3 > 0) {
 				list = DAO_TEST1.getList();
@@ -189,20 +190,20 @@ public class Main_TEST extends JFrame {
 	
 	// 테이블 전체보기 메서드
 	public void prn(List<VO_TEST1> list) {
-	    jta.append("번호\t이름\t주소\t전화번호\n");
+	    jta.append("번호\t이름\t주소\t\t전화번호\n");
 	    for (VO_TEST1 k : list) {
 	        jta.append(k.getCustid() + "\t");
 	        jta.append(k.getName() + "\t");
-	        jta.append(k.getAdress() + "\t");
-	        jta.append(k.getPhone() + "\t");
+	        jta.append(k.getAddress() + "\t\t");
+	        jta.append(k.getPhone() + "\n");
 	    }
 	}
 		
 		public void prn2(VO_TEST1 vo) {
-			jta.append("번호\t이름\t주소\t전화번호\n");
+			jta.append("번호\t이름\t주소\t\t전화번호\n");
 			jta.append(vo.getCustid() + "\t");
 			jta.append(vo.getName() + "\t");
-			jta.append(vo.getAdress() + "\t");
-			jta.append(vo.getPhone() + "\t");
+			jta.append(vo.getAddress() + "\t\t");
+			jta.append(vo.getPhone() + "\n");
 		}
 }

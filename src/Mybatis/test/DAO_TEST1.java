@@ -12,7 +12,7 @@ public class DAO_TEST1 {
 	// 싱글턴 패턴(동기화 처리) :
 		private synchronized static SqlSession getSession() {
 			if (ss == null) {
-				ss = DBService.getFactory().openSession();
+				ss = DBservice_TEST1.getFactory().openSession();
 			}
 			return ss;
 		}

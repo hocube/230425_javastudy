@@ -2,7 +2,7 @@ package Mybatis.test;
 
 public class VO_TEST1 {
 
-	private String custid, name, adress, phone;
+	private String custid, name, address, phone;
 
 	public String getCustid() {
 		return custid;
@@ -20,12 +20,12 @@ public class VO_TEST1 {
 		this.name = name;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getPhone() {
