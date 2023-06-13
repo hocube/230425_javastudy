@@ -4,25 +4,25 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.mybatis.example.BlogMapper">
 
-	<select id="custList" resultType="Mybatis.test.VO_test">
+	<select id="custList" resultType="Mybatis.test.VO_TEST1">
 		select * from CUSTOMER order by custid
 	</select>
 
-	<insert id="custIns" parameterType="Mybatis.test.VO_test">
+	<insert id="custIns" parameterType="Mybatis.test.VO_TEST1">
 		insert into CUSTOMER(custid, name, address, phone)
 		values(CUSTOMER_seq.nextval,#{name},#{address},#{phone})
 	</insert>
 
-	<delete id="custDel" parameterType="Mybatis.test.VO_test">
+	<delete id="custDel" parameterType="Mybatis.test.VO_TEST1">
 		delete from CUSTOMER where custid = #{custid}
 	</delete>
 
 	<select id="custOne" parameterType="String"
-		resultType="Mybatis.test.VO_test">
+		resultType="Mybatis.test.VO_TEST1">
 		select * from CUSTOMER where custid = #{custid}
 	</select>
 
-	<update id="custUpdate" parameterType="Mybatis.test.VO_test">
+	<update id="custUpdate" parameterType="Mybatis.test.VO_TEST1">
 		update CUSTOMER set name = #{name}, address = #{address}, phone = #{phone}
 		where custid = #{custid}
 	</update>
