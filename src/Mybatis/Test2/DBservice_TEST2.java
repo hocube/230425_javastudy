@@ -1,4 +1,4 @@
-package Mybatis.test;
+package Mybatis.Test2;
 
 import java.io.InputStream;
 
@@ -6,9 +6,9 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class DBservice_TEST1 {
+public class DBservice_TEST2 {
 private static SqlSessionFactory factory;
-static String resource = "mybatis/test1/config.xml";
+static String resource = "mybatis/test2/config.xml";
 
 static {
 	try {

@@ -1,4 +1,4 @@
-package network.com.ict.edu6;
+package network.com.ict.edu8;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -9,9 +9,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -20,7 +17,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -28,6 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import network.com.ict.edu8.ChatClient;
 
 public class ChatClient extends JFrame implements Runnable {
 	JPanel contentPane;
@@ -116,135 +114,41 @@ public class ChatClient extends JFrame implements Runnable {
 		setResizable(false);
 		setVisible(true);
 
+		// 입장하기 버튼
 		join_bt.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// cardLayout.show(contentPane, "chat");
 				// 사용자 닉네임 받기
-				String name = nickname_tf.getText().trim();
-				if(name.length() > 0) {
-					// 서버 접속 
-					if(connected()) {
-						try {
-							// 닉네임 보내기
-							Protocol p = new Protocol();
-							p.setCmd(1);
-							p.setMsg(name);
-							out.writeObject(p);
-							cardLayout.show(contentPane, "chat");
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-					}
-				}else {
-					JOptionPane.showMessageDialog(getParent(), "닉네임 입력하세요");
-					nickname_tf.setText("");
-					nickname_tf.requestFocus();
-				}
+				//String name = nickname_tf.
 			}
 		});
-		
-		// 창 종료 했을 때 
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				if(s != null) {
-					try {
-						Protocol p = new Protocol();
-						p.setCmd(0);
-						out.writeObject(p);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}else {
-					closed();
-				}
-			}
-		});
+		// 엔터를 쳤을 때
 		input_tf.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sendMessage();
+
 			}
 		});
+
+		// 보내기 버튼 눌렀을 때
 		send_bt.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sendMessage();
+
 			}
 		});
+
 	}
-	private void sendMessage() {
-		String msg = input_tf.getText().trim();
-		if(msg.length()>0) {
-			try {
-				// 메세지 보내기 
-				Protocol p = new Protocol();
-				p.setCmd(2);
-				p.setMsg(msg);
-				out.writeObject(p);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		input_tf.setText("");
-		input_tf.requestFocus();
-	}
-	
-	private boolean connected() {
-	  boolean value = true;
-	  try {
-		  s = new Socket("192.168.0.78", 7778);
-		  out = new ObjectOutputStream(s.getOutputStream());
-		  in = new ObjectInputStream(s.getInputStream());
-		  new Thread(this).start();
-		  return value;
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	  return false;
-	}
-	private void closed() {
-		try {
-			out.close();
-			in.close();
-			s.close();
-			System.exit(0);
-		} catch (Exception e) {
-		}
-	}
-	// 받기
+
 	@Override
 	public void run() {
-		esc:while(true) {
-			try {
-				Object obj = in.readObject();
-				if(obj != null) {
-					Protocol p = (Protocol)obj;
-					switch (p.getCmd()) {
-					case 0:  // 종료
-						break esc;
 
-					case 2 : // 메세지
-						jta.append(p.getMsg()+"\n");
-						jta.setCaretPosition(jta.getText().length());
-						break;
-					}
-					
-				}
-			} catch (Exception e) {
-			}
-		}
-		closed();
-		
 	}
+
 	public static void main(String[] args) {
-		// 평소 new 써서 하는 생성자가 아닌 이벤트 큐를 사용
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				ChatClient cc = new ChatClient();
-			}
-		});
+		new ChatClient();
 	}
 }
