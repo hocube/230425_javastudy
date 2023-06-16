@@ -1,16 +1,9 @@
-package Mybatis_LHJ;
+package network.com.ict.edu9db;
 
-// VO(Values Object) :
-//	DB 정보를 받거나 전달하기 위해서 사용
-public class HW0612_DB_VO_LHJ {
-	private String custid = null, name = null, address = null, phone = null;
+import java.io.Serializable;
 
-	public HW0612_DB_VO_LHJ() {
-	}
-
-	public HW0612_DB_VO_LHJ(String custid) {
-		this.custid = custid;
-	}
+public class VO implements Serializable{
+	private String custid, name, address, phone;
 
 	public String getCustid() {
 		return custid;
@@ -43,4 +36,5 @@ public class HW0612_DB_VO_LHJ {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 }

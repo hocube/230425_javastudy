@@ -1,4 +1,4 @@
-package network.com.ict.edu6;
+package network.co.ict.edu6.ns;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -29,73 +29,64 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class ChatClient extends JFrame implements Runnable {
+public class ChatClient extends JFrame implements Runnable{
 	JPanel contentPane;
 	JTextField nickname_tf;
 	JButton join_bt;
-
 	JPanel card1;
 	JPanel card2;
 	JTextField input_tf;
 	JButton send_bt;
 	JTextArea jta;
 	JScrollPane jsp;
-	CardLayout cardLayout;
-
-	// 접속하기 위해 필요한 것들
+	CardLayout cardLayout ;
+	
+	// 접속
 	Socket s = null;
 	ObjectOutputStream out = null;
 	ObjectInputStream in = null;
-
+	
 	public ChatClient() {
 		super("멀티 채팅 ver 0.2");
-		cardLayout = new CardLayout(); // 카드 레이아웃 생성
+		cardLayout = new CardLayout();
 
-		// setBounds(100, 100, 380, 520);
-		contentPane = new JPanel(); // 카드 레이아웃 담을 패널
-		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10)); // 테두리
-		contentPane.setLayout(cardLayout); // 카드 레이아웃 셋팅
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(10,10,10,10));
+		contentPane.setLayout(cardLayout);
 		add(contentPane);
-
-		// 첫 번째 카드(card1)
+		
 		card1 = new JPanel();
-		contentPane.add(card1, "login");
+		contentPane.add(card1,"login");
 		card1.setLayout(new BorderLayout());
-
-		// card1에 들어갈 애들
+		
 		JPanel jp1 = new JPanel();
 		card1.add(jp1, BorderLayout.SOUTH);
-		jp1.setLayout(new GridLayout(2, 1)); // 2줄. 닉네임 입력 줄, 입장하기 버튼 줄
-
+		jp1.setLayout(new GridLayout(2,1));
+		
 		JPanel jp2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		jp2.add(new JLabel("닉네임"));
-
+		jp2.add(new JLabel("닉네임 : "));
+		
 		nickname_tf = new JTextField(10);
 		jp2.add(nickname_tf);
-
+		
 		jp1.add(jp2);
-
+		
 		JPanel jp3 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		join_bt = new JButton("입장하기");
+		join_bt = new JButton(" 입장하기 ");
 		jp3.add(join_bt);
+		
 		jp1.add(jp3);
-
-		// 이미지 넣기
-		// 아이콘으로 넣는 방법
+		
 		JLabel img = new JLabel("");
 		img.setHorizontalAlignment(SwingConstants.CENTER);
 		img.setIcon(new ImageIcon(ChatClient.class.getResource("/images/talk.png")));
 		card1.add(img, BorderLayout.CENTER);
-
 		
-		
-		
-		// 두번째 카드(card2)
 		card2 = new JPanel();
-		contentPane.add(card2, "chat");
+		contentPane.add(card2,"chat");
 		card2.setLayout(new BorderLayout());
-
-		// card2에 들어갈 애들
+		
 		jta = new JTextArea();
 		jta.setLineWrap(true);
 		jta.setEditable(false);
@@ -104,21 +95,22 @@ public class ChatClient extends JFrame implements Runnable {
 		jta.setFont(new Font("굴림", Font.PLAIN, 15));
 		jsp = new JScrollPane(jta, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		card2.add(jsp, BorderLayout.CENTER);
-
+		
+		card2.add(jsp, BorderLayout.CENTER );
+		
 		JPanel jp4 = new JPanel(new BorderLayout());
 		input_tf = new JTextField();
 		jp4.add(input_tf, BorderLayout.CENTER);
 		send_bt = new JButton("보내기");
 		jp4.add(send_bt, BorderLayout.EAST);
-
+		
 		card2.add(jp4, BorderLayout.SOUTH);
-
+		
 		setSize(380, 550);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
-
+		
 		join_bt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -176,9 +168,6 @@ public class ChatClient extends JFrame implements Runnable {
 				sendMessage();
 			}
 		});
-		
-		
-		
 	}
 	private void sendMessage() {
 		String msg = input_tf.getText().trim();
@@ -245,7 +234,6 @@ public class ChatClient extends JFrame implements Runnable {
 		
 	}
 	public static void main(String[] args) {
-		// 평소 new 써서 하는 생성자가 아닌 이벤트 큐를 사용
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {

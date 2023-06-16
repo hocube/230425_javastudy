@@ -1,4 +1,4 @@
-package network.com.ict.edu8;
+package network.com.ict.edu.Test;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -1,4 +1,4 @@
-package network.com.ict.edu8;
+package network.com.ict.edu.Test;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,9 +6,9 @@ import java.net.Socket;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
-import network.com.ict.edu8.ChatServer;
-import network.com.ict.edu8.CopyClient;
-import network.com.ict.edu8.Protocol;
+import network.com.ict.edu.Test.ChatServer;
+import network.com.ict.edu.Test.CopyClient;
+import network.com.ict.edu.Test.Protocol;
 
 public class ChatServer {
 	

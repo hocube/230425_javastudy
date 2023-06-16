@@ -115,6 +115,10 @@ public class CopyClient extends Thread {
 			// 나 나가는 순간 방 없애기
 			server.removerRoom(c_room); // 룸을 없애겠다.
 		}
-		c_room = null;
+		
+		Protocol p = new Protocol();
+		p.setCmd(5);
+		p.setNames(c_room.getJoinUsers());
+		c_room.sendProtocol(p);
 	}
 }

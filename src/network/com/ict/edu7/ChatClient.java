@@ -31,7 +31,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 public class ChatClient extends JFrame implements Runnable {
-	////    git test
 	CardLayout cardLayout;
 	JPanel pg, login_p, wait_p, chat_p;
 	JLabel img;
@@ -411,6 +410,9 @@ public class ChatClient extends JFrame implements Runnable {
 					case 4: // 방 참여
 						join_list.setListData(p.getNames());
 						jta.append(p.getMsg() + "\n");
+						break;
+					case 5: // 참여자 목록
+						join_list.setListData(p.getNames());
 						break;
 					case 6: // 쪽지 보내기
 						JOptionPane.showMessageDialog(getParent(), p.getMsg());

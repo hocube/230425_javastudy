@@ -1,4 +1,4 @@
-package network.com.ict.edu8;
+package network.com.ict.edu.Test;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -25,7 +25,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import network.com.ict.edu8.ChatClient;
+import network.com.ict.edu.Test.ChatClient;
 
 public class ChatClient extends JFrame implements Runnable {
 	JPanel contentPane;
