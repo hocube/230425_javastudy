@@ -31,6 +31,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 public class ChatClient extends JFrame implements Runnable {
+	////    git test
 	CardLayout cardLayout;
 	JPanel pg, login_p, wait_p, chat_p;
 	JLabel img;
