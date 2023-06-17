@@ -10,7 +10,7 @@
 
 	<insert id="custIns" parameterType="network.com.ict.edu9db.VO">
 		insert into CUSTOMER(custid, name, address, phone)
-		values(CUSTOMER_seq.nextval,#{name},#{address},#{phone})
+		values(CUSTOMER_seq.nextval,#{name,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR})
 	</insert>
 
 	<delete id="custDel" parameterType="network.com.ict.edu9db.VO">

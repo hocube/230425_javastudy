@@ -348,7 +348,7 @@ public class ChatClient extends JFrame implements Runnable {
 	private boolean connected() {
 		boolean value = true;
 		try {
-			s = new Socket("192.168.0.78", 7779);
+			s = new Socket("192.168.31.168", 7779);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 			new Thread(this).start();

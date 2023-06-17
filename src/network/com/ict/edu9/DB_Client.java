@@ -117,10 +117,13 @@ public class DB_Client extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					System.out.println("프로토콜 실행");
 					Protocol p = new Protocol();
-					p.setCmd(1);
-					out.writeObject(p);
-					out.flush();
+					System.out.println("프로토콜 실행 완료");
+					p.setCmd(1);// 야 나 프로토콜 실행했다~
+					System.out.println("setCmd(1)");
+					out.writeObject(p);// 프로토콜 내용 전달
+					out.flush(); // 닫음
 				} catch (Exception e2) {
 				}
 			}
@@ -132,10 +135,19 @@ public class DB_Client extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					VO vo = new VO();
+					vo.setCustid(jtf1.getText());
+					vo.setName(jtf2.getText());
+					vo.setAddress(jtf3.getText());
+					vo.setPhone(jtf4.getText());
+
 					Protocol p = new Protocol();
-					p.setCmd(2);
+					p.setCmd(2); // '2'는 VO 객체를 추가하는 명령을 나타냅니다.
+					p.setVo(vo); // 프로토콜에 VO 객체를 첨부합니다.
+
 					out.writeObject(p);
 					out.flush();
+
 				} catch (Exception e2) {
 				}
 			}
@@ -163,16 +175,16 @@ public class DB_Client extends JFrame implements Runnable {
 	// 접속 메서드
 	public void connected() {
 		try {
-			s = new Socket("192.168.0.78", 7780);
+			s = new Socket("192.168.0.11", 7780);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 			new Thread(this).start();
-			
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
-	
+
 	// 끝내기 메서드
 	public void closed() {
 		try {
@@ -188,15 +200,20 @@ public class DB_Client extends JFrame implements Runnable {
 		esc: while (true) {
 			try {
 				Object obj = in.readObject();
-				if(obj != null) {
-					Protocol p = (Protocol)obj;
+				if (obj != null) {
+					Protocol p = (Protocol) obj;
 					switch (p.getCmd()) {
-					case 0: break esc;
+					case 0:
+						break esc;
 					case 1:
 						List<VO> list = p.getList();
 						prn(list);
 						break;
-					
+					case 2:
+						if (p.getList() != null) {
+							prn(p.getList());
+						}
+						break;
 					}
 				}
 			} catch (Exception e) {
@@ -204,16 +221,16 @@ public class DB_Client extends JFrame implements Runnable {
 		}
 		closed();
 	}
-	
+
 	public void prn(List<VO> list) {
 		jta.setText("");
-		 jta.append("\n\t\t\t 회원 전체 정보 \n\n");
-		 jta.append("\t번호\t이름\t주소\t\t전화번호\n");
+		jta.append("\n\t\t\t 회원 전체 정보 \n\n");
+		jta.append("\t번호\t이름\t주소\t\t전화번호\n");
 		for (VO k : list) {
-			jta.append("\t"+k.getCustid()+"\t");
-			jta.append(k.getName()+"\t");
-			jta.append(k.getAddress()+"\t\t");
-			jta.append(k.getPhone()+"\n");
+			jta.append("\t" + k.getCustid() + "\t");
+			jta.append(k.getName() + "\t");
+			jta.append(k.getAddress() + "\t\t");
+			jta.append(k.getPhone() + "\n");
 		}
 	}
 

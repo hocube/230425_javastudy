@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class DB_Server implements Runnable{
 	ServerSocket ss = null;
 	Socket s = null;
-	
+		
 	public DB_Server() {
 		try {
 			ss = new ServerSocket(7780);
@@ -24,9 +24,13 @@ public class DB_Server implements Runnable{
 	public void run() {
 		while(true) {
 			try {
+				System.out.println("DB_Server의 Run()");
 				s = ss.accept();
+				System.out.println("DB_Server의 ss.accept();");
 				CP_Client cc = new CP_Client(s, this);
+				System.out.println("DB_Server의 new CP_Client(s, this)");
 				cc.start();
+				System.out.println("DB_Server의 cc.start();");
 			} catch (Exception e) {
 			}
 		}

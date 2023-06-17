@@ -18,13 +18,12 @@ public class CP_Client extends Thread{
 		ObjectInputStream in;
 		ObjectOutputStream out;
 		String ip;
-		DB_Client client;
 
 		public CP_Client(Socket s, DB_Server server) {
 			this.s = s;
 			this.server = server;
-			this.client = client;
 			try {
+				System.out.println("CP_Client in&out 실행");
 				in = new ObjectInputStream(s.getInputStream());
 				out = new ObjectOutputStream(s.getOutputStream());
 			} catch (Exception e) {
@@ -35,6 +34,7 @@ public class CP_Client extends Thread{
 		public void run() {
 			esc: while (true) {
 				try {
+					System.out.println("CP_Client run() 실행");
 					Object obj = in.readObject();
 					if(obj != null) {
 						Protocol p = (Protocol)obj;
@@ -44,17 +44,14 @@ public class CP_Client extends Thread{
 							out.flush();
 							break esc;
 						case 1:
+							System.out.println("CP_Client run()의 case 1 실행");
 							List<VO> list = DAO.getList();
 							p.setList(list);
 							out.writeObject(p);
 							out.flush();
 							break;
 						case 2:
-							VO vo = new VO();
-							vo.setCustid(client.jtf1.getText());
-							vo.setName(client.jtf2.getText());
-							vo.setAddress(client.jtf3.getText());
-							vo.setPhone(client.jtf4.getText());
+							VO vo = (VO)p.getVo(); // VO 객체를 직접 프로토콜에서 가져옵니다.
 							int result = DAO.getInsert(vo);
 							if(result > 0) {
 								list = DAO.getList();

@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class DBservice_TEST1 {
 private static SqlSessionFactory factory;
-static String resource = "mybatis/test1/config.xml";
+static String resource = "mybatis/test/config.xml";
 
 static {
 	try {
