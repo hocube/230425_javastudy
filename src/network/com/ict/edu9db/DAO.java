@@ -25,14 +25,9 @@ public class DAO {
 	}
 
 	// select문, 결과는 하나, 파라미터 있음(String)
-	//public static VO getOne(String custid) {
-	//	VO vo = getSession().selectOne("custOne", custid);
-	//	return vo;
-	//}
-	
-	public static int getOne(String custid) {
-		int result = getSession().selectOne("custOne", custid);
-		return result;
+	public static VO getOne(String custid) {
+		VO vo = getSession().selectOne("custOne", custid);
+		return vo;
 	}
 
 	// insert, delete, update 결과가 int, 파라미터 있음.

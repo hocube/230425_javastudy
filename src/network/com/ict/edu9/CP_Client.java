@@ -74,16 +74,17 @@ public class CP_Client extends Thread {
 						}
 						break;
 					case 4:
-						VO vo2 = (VO) p.getVo();
-						result = DAO.getOne(vo2.getCustid());
-						// 전역변수에서 선언한 result는 int라 여기서는 사용할 수 없음.
+						VO vo2 = p.getVo();
+						System.out.println("vo2: " + vo2);
+						System.out.println("vo2.getCustid(): " + (vo2 != null ? vo2.getCustid() : "vo2 is null"));
+						VO resultVO = DAO.getOne(vo2.getCustid()); // 전역변수에서 선언한 result는 int라 여기서는 사용할 수 없음.
 						// DAO.getOne(vo2.getCustid())는 VO 객체를 반환하므로
 						// 별도의 VO 타입 변수를 선언해야함.
-						if (result > 0) {
-							list = DAO.getList();
-							p.setList(list);
-							out.writeObject(p);
-							out.flush();
+					    if (resultVO != null) {
+					        list = DAO.getList();
+					        p.setList(list);
+					        out.writeObject(p);
+					        out.flush();
 						}
 						break;
 					}

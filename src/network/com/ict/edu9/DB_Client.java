@@ -281,6 +281,7 @@ public class DB_Client extends JFrame implements Runnable {
 	//한개만 볼 때
 	public void prn2(VO vo) {
 		jta.setText("");
+		jta.append("\n\t\t\t 회원 전체 정보 \n\n");
 		jta.append("번호\t이름\t주소\t\t전화번호\n");
 		jta.append(vo.getCustid() + "\t");
 		jta.append(vo.getName() + "\t");
