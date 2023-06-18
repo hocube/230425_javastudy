@@ -73,19 +73,22 @@ public class CP_Client extends Thread {
 							out.flush();
 						}
 						break;
-					case 4:
+					case 4: 
+						// custId로 고객을 검색한 후, 검색 결과를 Protocol 객체에 설정하여 클라이언트로 전송하는 과정
 						VO vo2 = p.getVo();
 						System.out.println("vo2: " + vo2);
 						System.out.println("vo2.getCustid(): " + (vo2 != null ? vo2.getCustid() : "vo2 is null"));
-						VO resultVO = DAO.getOne(vo2.getCustid()); // 전역변수에서 선언한 result는 int라 여기서는 사용할 수 없음.
-						// DAO.getOne(vo2.getCustid())는 VO 객체를 반환하므로
-						// 별도의 VO 타입 변수를 선언해야함.
-					    if (resultVO != null) {
-					        list = DAO.getList();
-					        p.setList(list);
-					        out.writeObject(p);
-					        out.flush();
+						VO resultVO = DAO.getOne(vo2.getCustid()); // DAO 클래스의 getById 메서드를 호출하여 custId로 고객을 검색
+						if (resultVO != null) {// custId에 해당하는 고객 정보를 찾은 경우 실행
+							list = new ArrayList<>(); // list라는 새로운 ArrayList 객체를 생성
+							list.add(resultVO); // resultVO(검색 결과)를 list에 추가
+							p.setList(list); // 검색 결과를 Protocol 객체에 설정
+						} else { // custId에 해당하는 고객 정보가 없는 경우 
+							list = new ArrayList<>(); // list라는 새로운 ArrayList 객체를 생성
+							p.setList(list); // 빈 목록을 설정하여 검색 결과가 없음을 클라이언트에 알림
 						}
+						out.writeObject(p); // 검색 결과를 담은 Protocol 객체 p를 클라이언트로 전송. 이를 통해 클라이언트는 서버에서 전송한 고객 정보를 수신.
+						out.flush(); // 출력 버퍼를 비우기 위해 flush() 메서드를 호출.이를 통해 클라이언트로 데이터가 즉시 전송.
 						break;
 					}
 				}

@@ -201,6 +201,8 @@ public class DB_Client extends JFrame implements Runnable {
 	// 접속 메서드
 	public void connected() {
 		try {
+			// 192.168.0.11 (puppy)
+			// 192.168.31.128 (rabbit)
 			s = new Socket("192.168.0.11", 7780);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
@@ -249,13 +251,15 @@ public class DB_Client extends JFrame implements Runnable {
 						}
 						break;
 					case 4:
-						// 성공하면 회원 정보를 가져와 화면에 출력
-						if (p.getVo() != null) {
-							jta.setText("");
-							prn2(p.getVo());
-							// 검색은 list전체를 보여주는게 아닌 특정 회원 정보만 보여주기 때문에.
-						}
-						break;
+						List<VO> resultList = p.getList();
+						//p.getList()를 사용하여 Protocol 객체에서 검색 결과를 가져옴.
+						//p.getList()가 null이 아니고, 결과 리스트의 크기가 0보다 큰 경우, 즉 검색 결과가 존재하는 경우 실행.
+					    if (resultList != null && resultList.size() > 0) {
+					        prn(resultList); // 결과 리스트를 전체 출력
+					    } else {
+					        jta.setText(""); // 결과가 없을 경우 텍스트 영역을 초기화
+					    }
+					    break;
 					}
 				}
 			} catch (Exception e) {

@@ -2,7 +2,6 @@ package network.com.ict.edu9;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class DB_Server implements Runnable{
 	ServerSocket ss = null;
