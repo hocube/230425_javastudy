@@ -73,17 +73,15 @@ public class CP_Client extends Thread {
 							out.flush();
 						}
 						break;
-					case 4: 
+					case 4: // custId로 고객 검색
 						// custId로 고객을 검색한 후, 검색 결과를 Protocol 객체에 설정하여 클라이언트로 전송하는 과정
 						VO vo2 = p.getVo();
-						System.out.println("vo2: " + vo2);
-						System.out.println("vo2.getCustid(): " + (vo2 != null ? vo2.getCustid() : "vo2 is null"));
-						VO resultVO = DAO.getOne(vo2.getCustid()); // DAO 클래스의 getById 메서드를 호출하여 custId로 고객을 검색
+						VO resultVO = DAO.getOne(vo2.getCustid()); // DAO 클래스의 getOne메서드를 호출하여 custId로 고객을 검색
 						if (resultVO != null) {// custId에 해당하는 고객 정보를 찾은 경우 실행
 							list = new ArrayList<>(); // list라는 새로운 ArrayList 객체를 생성
 							list.add(resultVO); // resultVO(검색 결과)를 list에 추가
 							p.setList(list); // 검색 결과를 Protocol 객체에 설정
-						} else { // custId에 해당하는 고객 정보가 없는 경우 
+						} else { // custId에 해당하는 고객 정보가 없는 경우
 							list = new ArrayList<>(); // list라는 새로운 ArrayList 객체를 생성
 							p.setList(list); // 빈 목록을 설정하여 검색 결과가 없음을 클라이언트에 알림
 						}
@@ -92,6 +90,23 @@ public class CP_Client extends Thread {
 						break;
 					}
 				}
+//					case 4:  // 이름으로 고객 검색
+//						VO vo2 = p.getVo();
+//						VO resultVO = DAO.getOne(vo2.getName());
+//						if(resultVO != null) {
+//							list = new ArrayList<>();
+//							list.add(resultVO);
+//							p.setList(list);
+//						}else {
+//							list = new ArrayList<>();
+//							p.setList(list);
+//						}
+//						out.writeObject(p);
+//						out.flush();
+//						break;
+//					}
+//				}
+
 			} catch (Exception e) {
 				System.out.println(e);
 			}

@@ -181,18 +181,18 @@ public class DB_Client extends JFrame implements Runnable {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					VO vo = new VO();
-					vo.setCustid(jtf1.getText());
-					
+					vo.setCustid(jtf1.getText()); // custid로 검색
+					//vo.setName(jtf2.getText()); // 이름으로 검색
+
 					Protocol p = new Protocol();
 					p.setCmd(4);
 					p.setVo(vo);
-					
+
 					out.writeObject(p);
 					out.flush();
-					
 				} catch (Exception e2) {
 				}
-				
+
 			}
 
 		});
@@ -252,24 +252,24 @@ public class DB_Client extends JFrame implements Runnable {
 						break;
 					case 4:
 						List<VO> resultList = p.getList();
-						//p.getList()를 사용하여 Protocol 객체에서 검색 결과를 가져옴.
-						//p.getList()가 null이 아니고, 결과 리스트의 크기가 0보다 큰 경우, 즉 검색 결과가 존재하는 경우 실행.
-					    if (resultList != null && resultList.size() > 0) {
-					        prn(resultList); // 결과 리스트를 전체 출력
-					    } else {
-					        jta.setText(""); // 결과가 없을 경우 텍스트 영역을 초기화
-					    }
-					    break;
+						// p.getList()를 사용하여 Protocol 객체에서 검색 결과를 가져옴.
+						// p.getList()가 null이 아니고, 결과 리스트의 크기가 0보다 큰 경우, 즉 검색 결과가 존재하는 경우 실행.
+						if (resultList != null && resultList.size() > 0) {
+							prn(resultList); // 결과 리스트를 전체 출력
+						} else {
+							jta.setText(""); // 결과가 없을 경우 텍스트 영역을 초기화
+						}
+						break;
 					}
 				}
 			} catch (Exception e) {
-			    e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		closed();
 	}
-	
-	//전체 리스트
+
+	// 전체 리스트
 	public void prn(List<VO> list) {
 		jta.setText("");
 		jta.append("\n\t\t\t 회원 전체 정보 \n\n");
@@ -281,8 +281,8 @@ public class DB_Client extends JFrame implements Runnable {
 			jta.append(k.getPhone() + "\n");
 		}
 	}
-	
-	//한개만 볼 때
+
+	// 한개만 볼 때
 	public void prn2(VO vo) {
 		jta.setText("");
 		jta.append("\n\t\t\t 회원 전체 정보 \n\n");

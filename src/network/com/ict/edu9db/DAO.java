@@ -24,12 +24,19 @@ public class DAO {
 		return list;
 	}
 
+  // custid로 검색
 	// select문, 결과는 하나, 파라미터 있음(String)
 	public static VO getOne(String custid) {
 		VO vo = getSession().selectOne("custOne", custid);
 		return vo;
 	}
-
+	
+//	// 이름으로 검색
+//	public static VO getOne(String Name) {
+//		VO vo = getSession().selectOne("custOne", Name);
+//		return vo;
+//	}
+	
 	// insert, delete, update 결과가 int, 파라미터 있음.
 	// 위에 3개는 꼭! 반드시! commit을 해야 된다. 안 하면 안 바뀜
 	public static int getInsert(VO vo) {

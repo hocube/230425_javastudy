@@ -11,10 +11,16 @@
 	<delete id="custDel" parameterType="network.com.ict.edu9db.VO">
 		delete from CUSTOMER where custid = #{custid}
 	</delete>
+	<!-- custid로 검색 -->
 	<select id="custOne" parameterType="String"
 		resultType="network.com.ict.edu9db.VO">
 		select * from CUSTOMER where custid = #{custid}
 	</select>
+	<!-- 이름으로 검색 -->
+	<!--<select id="custOne" parameterType="String"
+		resultType="network.com.ict.edu9db.VO">
+		select * from CUSTOMER where name like #{name} || '%'
+	</select>-->
 	<update id="custUpdate" parameterType="network.com.ict.edu9db.VO">
 		update CUSTOMER set name = #{name}, address = #{address}, phone = #{phone}
 		where custid = #{custid}
