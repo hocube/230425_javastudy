@@ -32,6 +32,7 @@ public class DB_Server implements Runnable{
 				cc.start();
 				System.out.println("DB_Server의 cc.start();");
 			} catch (Exception e) {
+			    e.printStackTrace();
 			}
 		}
 		

@@ -25,9 +25,14 @@ public class DAO {
 	}
 
 	// select문, 결과는 하나, 파라미터 있음(String)
-	public static VO getOne(String custid) {
-		VO vo = getSession().selectOne("custOne", custid);
-		return vo;
+	//public static VO getOne(String custid) {
+	//	VO vo = getSession().selectOne("custOne", custid);
+	//	return vo;
+	//}
+	
+	public static int getOne(String custid) {
+		int result = getSession().selectOne("custOne", custid);
+		return result;
 	}
 
 	// insert, delete, update 결과가 int, 파라미터 있음.
@@ -49,11 +54,11 @@ public class DAO {
 		ss.commit();
 		return result;
 	}
-	
+
 	public static boolean getIdChk(String custid) {
 		boolean result = false;
 		VO vo = getSession().selectOne("idChk", custid);
-		if(vo == null) {
+		if (vo == null) {
 			result = true;
 		}
 		return result;

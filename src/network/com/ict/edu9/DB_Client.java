@@ -117,11 +117,11 @@ public class DB_Client extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					System.out.println("프로토콜 실행");
+					System.out.println("DB_Client jb1버튼의 프로토콜 실행");
 					Protocol p = new Protocol();
-					System.out.println("프로토콜 실행 완료");
+					System.out.println("DB_Client jb1버튼의 프로토콜 실행 완료");
 					p.setCmd(1);// 야 나 프로토콜 실행했다~
-					System.out.println("setCmd(1)");
+					System.out.println("DB_Client jb1버튼의 setCmd(1)");
 					out.writeObject(p);// 프로토콜 내용 전달
 					out.flush(); // 닫음
 				} catch (Exception e2) {
@@ -142,11 +142,11 @@ public class DB_Client extends JFrame implements Runnable {
 					vo.setPhone(jtf4.getText());
 
 					Protocol p = new Protocol();
-					p.setCmd(2); // '2'는 VO 객체를 추가하는 명령을 나타냅니다.
-					p.setVo(vo); // 프로토콜에 VO 객체를 첨부합니다.
+					p.setCmd(2); // cmd에 2를 담는다.
+					p.setVo(vo); // VO에 위에서 설정한 vo(jtf1234를 텍스트로 가져오는)를 담는다.
 
-					out.writeObject(p);
-					out.flush();
+					out.writeObject(p); // bjectOutputStream을 통해 Protocol 객체를 서버로 전송
+					out.flush(); // 출력 스트림을 비우는 역할
 
 				} catch (Exception e2) {
 				}
@@ -158,7 +158,19 @@ public class DB_Client extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					VO vo = new VO();
+					vo.setCustid(jtf1.getText());
 
+					Protocol p = new Protocol();
+					p.setCmd(3);
+					p.setVo(vo);
+
+					out.writeObject(p);
+					out.flush();
+
+				} catch (Exception e2) {
+				}
 			}
 		});
 
@@ -167,8 +179,22 @@ public class DB_Client extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				try {
+					VO vo = new VO();
+					vo.setCustid(jtf1.getText());
+					
+					Protocol p = new Protocol();
+					p.setCmd(4);
+					p.setVo(vo);
+					
+					out.writeObject(p);
+					out.flush();
+					
+				} catch (Exception e2) {
+				}
+				
 			}
+
 		});
 	}
 
@@ -210,18 +236,36 @@ public class DB_Client extends JFrame implements Runnable {
 						prn(list);
 						break;
 					case 2:
+						// 성공하면 회원 정보를 가져와 화면에 출력
 						if (p.getList() != null) {
 							prn(p.getList());
+						}
+						break;
+					case 3:
+						// 성공하면 회원 정보를 가져와 화면에 출력
+						if (p.getList() != null) {
+							jta.setText("");
+							prn(p.getList());
+						}
+						break;
+					case 4:
+						// 성공하면 회원 정보를 가져와 화면에 출력
+						if (p.getVo() != null) {
+							jta.setText("");
+							prn2(p.getVo());
+							// 검색은 list전체를 보여주는게 아닌 특정 회원 정보만 보여주기 때문에.
 						}
 						break;
 					}
 				}
 			} catch (Exception e) {
+			    e.printStackTrace();
 			}
 		}
 		closed();
 	}
-
+	
+	//전체 리스트
 	public void prn(List<VO> list) {
 		jta.setText("");
 		jta.append("\n\t\t\t 회원 전체 정보 \n\n");
@@ -232,6 +276,16 @@ public class DB_Client extends JFrame implements Runnable {
 			jta.append(k.getAddress() + "\t\t");
 			jta.append(k.getPhone() + "\n");
 		}
+	}
+	
+	//한개만 볼 때
+	public void prn2(VO vo) {
+		jta.setText("");
+		jta.append("번호\t이름\t주소\t\t전화번호\n");
+		jta.append(vo.getCustid() + "\t");
+		jta.append(vo.getName() + "\t");
+		jta.append(vo.getAddress() + "\t\t");
+		jta.append(vo.getPhone() + "\n");
 	}
 
 	public static void main(String[] args) {
