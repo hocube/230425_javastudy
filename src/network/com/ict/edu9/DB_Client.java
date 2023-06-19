@@ -203,7 +203,7 @@ public class DB_Client extends JFrame implements Runnable {
 		try {
 			// 192.168.0.11 (puppy)
 			// 192.168.31.128 (rabbit)
-			s = new Socket("192.168.0.11", 7780);
+			s = new Socket("192.168.0.78", 7780);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 			new Thread(this).start();
