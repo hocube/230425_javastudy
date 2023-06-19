@@ -20,6 +20,7 @@ public class MobileTicket extends JFrame{
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false); // 크기 조절 비활성화
 	}
 
 	public static void main(String[] args) {
